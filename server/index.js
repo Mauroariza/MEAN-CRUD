@@ -1,19 +1,21 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 
 //local imports
-const connectDb = require('./db.js')
-const employeeRoutes = require('./controllers/employee.controller')
-const { errorHandler } = require('./middlewares')
+import connectDb from './db.js'
+import employeeRoutes from './controllers/employee.controller.js'
+import middlewares from './middlewares/index.js';
+const { errorHandler } = middlewares;
+
+const { json } = bodyParser;
 
 const app = express()
 //middleware
-app.use(bodyParser.json())
+app.use(json())
 app.use(cors({origin:'http://localhost:4200'}))
 app.use('/api/employees', employeeRoutes)
 app.use(errorHandler)
-
 
 connectDb()
     .then(() => {
@@ -21,4 +23,3 @@ connectDb()
         app.listen(3000,
             () => console.log('server started at 3000.'))
     })
-    .catch(err => console.log(err))

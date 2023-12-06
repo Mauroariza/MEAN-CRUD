@@ -1,4 +1,4 @@
-exports.generateCrudMethods = Model => {
+export function generateCrudMethods(Model) {
     return {
         getAll: () => Model.find(),
         getById: id => Model.findById(id),

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { model } from 'mongoose'
 
-module.exports = mongoose.model('Employee', {
+export default model('Employee', {
     fullName: { type: String },
     position: { type: String },
     location: { type: String },

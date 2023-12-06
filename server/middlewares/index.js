@@ -1,4 +1,5 @@
-const ObjectId = require('mongoose').Types.ObjectId
+import { Types } from 'mongoose';
+const { ObjectId } = Types;
 
 const validateDbId = (req, res, next) => {
     if (ObjectId.isValid(req.params.id) == false)
@@ -15,11 +16,12 @@ const raiseRecord404Error = (req, res) => {
     })
 }
 
-const errorHandler = (error, req, res, next) => {
-    res.status(500).json({ error })
-}
+export const errorHandler = (err, req, res, next) => {
+    console.error(err);
+    res.status(500).send('Something went wrong');
+  };
 
-module.exports = {
+export default {
     validateDbId,
     raiseRecord404Error,
     errorHandler

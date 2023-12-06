@@ -1,10 +1,11 @@
-const express = require('express')
+import express from 'express';
 const router = express.Router()
 
-const Employee = require('../models/employee.model')
-const { generateCrudMethods } = require('../services')
+import Employee from '../models/employee.model.js';
+import { generateCrudMethods } from '../services/employee.service.js';
 const employeeCrud = generateCrudMethods(Employee)
-const { validateDbId, raiseRecord404Error } = require('../middlewares');
+import middlewares from '../middlewares/index.js';
+const { validateDbId, raiseRecord404Error } = middlewares;
 
 
 router.get('/', (req, res, next) => {
@@ -59,4 +60,4 @@ router.delete('/:id', validateDbId, (req, res) => {
 })
 
 
-module.exports = router
+export default router;
